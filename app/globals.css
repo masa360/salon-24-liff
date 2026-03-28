@@ -1,0 +1,28 @@
+:root {
+  --bg: #fffaf7;
+  --text: #2c1a0e;
+  --muted: #7a6555;
+  --line: #ead9ca;
+  --accent: #b5714a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Kaku Gothic ProN',
+    'Yu Gothic UI', sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
