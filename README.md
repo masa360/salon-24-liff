@@ -1,7 +1,20 @@
-# 美容室「24」（顧客向け LIFF 予約サイト）
+# Hair Boutique twenty four（顧客向け LIFF 予約サイト）
 
-`projects/salon-24` は、美容室 **24** 向けの予約 LIFF を独立運用するための Next.js アプリです。  
+`projects/salon-24` は、**Hair Boutique twenty four** 向けの予約 LIFF を独立運用するための Next.js アプリです。  
 構成は `bride-innovation` と同系統で、**店舗 → メニュー → 日時 → 確認** の流れです。
+
+## 公開リポジトリ（`liff-projects`）
+
+本体はモノレポ [LINE-reserve](https://github.com/masa360/LINE-reserve) の `projects/salon-24` にあり、**LIFF 単体用**に [masa360/liff-projects](https://github.com/masa360/liff-projects) の **`salon-24` ブランチ**へも同内容を載せています（ルートがこのアプリ＝Vercel の Root Directory は `.`）。
+
+## LINE-reserve から `liff-projects` へ再送する手順
+
+```bash
+git remote add liff-projects https://github.com/masa360/liff-projects.git   # 初回のみ
+git checkout feature/salon-24   # salon-24 を含むブランチ
+git subtree split --prefix=projects/salon-24 -b salon-24-export
+git push liff-projects salon-24-export:salon-24
+```
 
 ## 特徴
 
@@ -35,8 +48,12 @@ npm run dev
 
 ## Vercel
 
-- Root Directory: `projects/salon-24`
-- 環境変数: `GAS_WEBAPP_URL` / `NEXT_PUBLIC_LIFF_ID`
+| 接続先 | Root Directory |
+|--------|----------------|
+| **LINE-reserve** リポジトリ | `projects/salon-24` |
+| **liff-projects** の `salon-24` ブランチ | `.`（リポジトリルート） |
+
+環境変数: `GAS_WEBAPP_URL` / `NEXT_PUBLIC_LIFF_ID`
 
 ## データのカスタマイズ
 
