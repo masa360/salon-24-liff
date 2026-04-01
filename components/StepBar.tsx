@@ -11,40 +11,26 @@ const steps = [
 
 export default function StepBar({ currentStep }: StepBarProps) {
   return (
-    <div style={{ background: '#fff', borderBottom: '1px solid #f0e9e0', padding: '12px 16px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'relative' }}>
-        <div
-          style={{
-            position: 'absolute',
-            left: 26,
-            right: 26,
-            top: 14,
-            height: 1,
-            background: '#e8ddd2',
-          }}
-        />
+    <div className="bg-[#FFFEFB] px-4 py-3 border-b border-[#F0E9E0]">
+      <div className="flex items-center justify-between relative">
+        <div className="absolute left-0 right-0 top-[14px] flex px-3">
+          <div className={`flex-1 h-px transition-colors ${currentStep >= 2 ? 'bg-[#B5714A]' : 'bg-[#E8DDD2]'}`} />
+          <div className={`flex-1 h-px transition-colors ${currentStep >= 3 ? 'bg-[#B5714A]' : 'bg-[#E8DDD2]'}`} />
+          <div className={`flex-1 h-px transition-colors ${currentStep >= 4 ? 'bg-[#B5714A]' : 'bg-[#E8DDD2]'}`} />
+        </div>
         {steps.map((step) => {
           const active = step.number === currentStep;
           const done = step.number < currentStep;
           return (
-            <div key={step.number} style={{ zIndex: 1, textAlign: 'center' }}>
-              <div
-                style={{
-                  width: 28,
-                  height: 28,
-                  borderRadius: 14,
-                  margin: '0 auto',
-                  display: 'grid',
-                  placeItems: 'center',
-                  color: '#fff',
-                  fontSize: 12,
-                  fontWeight: 700,
-                  background: active || done ? '#b5714a' : '#d8c7ba',
-                }}
-              >
+            <div key={step.number} className="flex flex-col items-center gap-1 z-10">
+              <div className={`w-7 h-7 rounded-full grid place-items-center text-xs font-bold transition-all ${
+                active || done ? 'bg-[#B5714A] text-white' : 'bg-[#D8C7BA] text-white'
+              }`}>
                 {done ? '✓' : step.number}
               </div>
-              <p style={{ margin: '6px 0 0', fontSize: 10, color: active ? '#2c1a0e' : '#7a6555' }}>{step.label}</p>
+              <p className={`m-0 text-[10px] whitespace-nowrap ${active ? 'text-[#2C1A0E]' : 'text-[#7A6555]'}`}>
+                {step.label}
+              </p>
             </div>
           );
         })}

@@ -3,23 +3,30 @@ interface TimeSlotButtonProps {
   available: boolean;
   isSelected: boolean;
   onSelect: (time: string) => void;
+  interactionDisabled?: boolean;
 }
 
-export default function TimeSlotButton({ time, available, isSelected, onSelect }: TimeSlotButtonProps) {
+export default function TimeSlotButton({
+  time,
+  available,
+  isSelected,
+  onSelect,
+  interactionDisabled = false,
+}: TimeSlotButtonProps) {
   return (
     <button
       type="button"
-      disabled={!available}
+      disabled={!available || interactionDisabled}
       onClick={() => onSelect(time)}
-      style={{
-        height: 38,
-        borderRadius: 10,
-        border: `1px solid ${isSelected ? '#b5714a' : '#e8ddd2'}`,
-        fontSize: 12,
-        background: !available ? '#f0e9e0' : isSelected ? '#b5714a' : '#fff',
-        color: !available ? '#b0a090' : isSelected ? '#fff' : '#2c1a0e',
-        textDecoration: !available ? 'line-through' : 'none',
-      }}
+      className={`h-10 rounded-xl border-2 text-sm font-medium transition-all ${
+        !available
+          ? 'bg-[#F3EDE4] border-[#E8DDD2] text-[#C4B4A4] line-through cursor-not-allowed'
+          : interactionDisabled
+            ? 'opacity-45 cursor-not-allowed border-[#E8DDD2] bg-[#FAF7F2] text-[#B0A090]'
+            : isSelected
+              ? 'bg-[#B5714A] border-[#B5714A] text-white'
+              : 'bg-[#FFFEFB] border-[#E8DDD2] text-[#2C1A0E] hover:border-[#B5714A] hover:text-[#B5714A]'
+      }`}
     >
       {time}
     </button>
